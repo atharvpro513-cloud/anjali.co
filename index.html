@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fffaf5">
+    <meta name="description" content="Handcrafted cakes and pastries, baked fresh every day at Anjali Co.">
+    <title>Anjali Co. — Cakes &amp; Pastries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #fffaf5;
+            --ink: #30221e;
+            --muted: #82736c;
+            --pink: #f3d9d3;
+            --rose: #a64e43;
+            --rose-dark: #843c34;
+            --line: #eee3da;
+            --white: #fff;
+            --serif: "Playfair Display", Georgia, serif;
+            --sans: "DM Sans", Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+        }
+        button, input, textarea { font: inherit; }
+        button { cursor: pointer; }
+        a { color: inherit; text-decoration: none; }
+
+        .announcement {
+            padding: 10px 20px;
+            background: var(--ink);
+            color: #fffaf5;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: .08em;
+        }
+        .announcement span { color: #f2c4b8; }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background: rgba(255, 250, 245, .94);
+            border-bottom: 1px solid rgba(238, 227, 218, .8);
+            backdrop-filter: blur(12px);
+        }
+        .nav {
+            width: min(1160px, calc(100% - 48px));
+            height: 76px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand {
+            font-family: var(--serif);
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: -.04em;
+        }
+        .brand span { color: var(--rose); }
+        .nav-links { display: flex; align-items: center; gap: 34px; font-size: 13px; color: #574842; }
+        .nav-links a:hover { color: var(--rose); }
+        .cart-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 16px;
+            background: transparent;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--ink);
+            font-size: 13px;
+            transition: .2s ease;
+        }
+        .cart-button:hover { border-color: var(--rose); color: var(--rose); }
+        .cart-count {
+            display: grid;
+            place-items: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            border-radius: 50px;
+            background: var(--rose);
+            color: white;
+            font-size: 11px;
+        }
+
+        .hero {
+            width: min(1160px, calc(100% - 48px));
+            min-height: 530px;
+            margin: 34px auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1.08fr;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #f5e8df;
+        }
+        .hero-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 64px clamp(32px, 6vw, 82px);
+        }
+        .eyebrow {
+            margin: 0 0 18px;
+            color: var(--rose);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        h1, h2, h3, p { margin-top: 0; }
+        h1 {
+            max-width: 480px;
+            margin-bottom: 18px;
+            font-family: var(--serif);
+            font-size: clamp(44px, 5vw, 66px);
+            font-weight: 500;
+            line-height: 1.06;
+            letter-spacing: -.045em;
+        }
+        h1 em { color: var(--rose); font-weight: 500; }
+        .hero-copy > p:not(.eyebrow) {
+            max-width: 390px;
+            margin-bottom: 30px;
+            color: #6d5b53;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .primary-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 21px;
+            border-radius: 3px;
+            background: var(--rose);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background .2s, transform .2s;
+        }
+        .primary-link:hover { background: var(--rose-dark); transform: translateY(-2px); }
+        .hero-image {
+            min-height: 530px;
+            background: #d7ad91 url("https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1400&q=85") center 48% / cover no-repeat;
+        }
+        .trust-row {
+            width: min(1160px, calc(100% - 48px));
+            margin: 0 auto;
+            padding: 22px 0 24px;
+            display: flex;
+            justify-content: center;
+            gap: clamp(24px, 7vw, 90px);
+            border-bottom: 1px solid var(--line);
+            color: #76665e;
+            font-size: 12px;
+        }
+        .trust-row span { display: inline-flex; align-items: center; gap: 9px; }
+        .trust-row b { color: var(--rose); font-size: 16px; }
+
+        .menu-section {
+            width: min(1160px, calc(100% - 48px));
+            margin: 92px auto 100px;
+            scroll-margin-top: 100px;
+        }
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+        .section-heading .eyebrow { margin-bottom: 10px; }
+        h2 {
+            margin-bottom: 0;
+            font-family: var(--serif);
+            font-size: clamp(34px, 4vw, 46px);
+            font-weight: 500;
+            letter-spacing: -.035em;
+        }
+        .section-note { margin: 0 0 5px; color: var(--muted); font-size: 13px; }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+        .product-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            background: var(--white);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(65, 38, 27, .08); }
+        .product-image {
+            position: relative;
+            aspect-ratio: 1.35;
+            overflow: hidden;
+            background: #ead9cd;
+        }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+        .product-card:hover .product-image img { transform: scale(1.04); }
+        .tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 7px 10px;
+            border-radius: 2px;
+            background: var(--cream);
+            color: var(--rose-dark);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .product-info { padding: 18px 19px 19px; }
+        .product-topline { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+        .product-topline h3 { margin: 0; font-family: var(--serif); font-size: 20px; font-weight: 600; }
+        .price { color: var(--rose); font-size: 14px; font-weight: 700; white-space: nowrap; }
+        .product-info p { min-height: 38px; margin: 9px 0 16px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+        .add-button {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #e8d7ce;
+            border-radius: 3px;
+            background: transparent;
+            color: var(--rose-dark);
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s;
+        }
+        .add-button:hover { background: var(--rose); border-color: var(--rose); color: white; }
+
+        .made-with-love {
+            width: min(1160px, calc(100% - 48px));
+            margin: 0 auto 92px;
+            padding: 46px 24px;
+            background: #f4e5dc;
+            text-align: center;
+        }
+        .made-with-love .eyebrow { margin-bottom: 9px; }
+        .made-with-love h2 { font-size: 34px; }
+        .made-with-love p:last-child { max-width: 490px; margin: 12px auto 0; color: #76665e; font-size: 13px; line-height: 1.8; }
+        footer { padding: 30px 24px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 12px; }
+        footer strong { color: var(--ink); font-family: var(--serif); font-size: 16px; }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(35, 25, 21, .5);
+        }
+        .overlay.open { display: flex; }
+        .dialog {
+            position: relative;
+            width: min(480px, 100%);
+            max-height: min(90vh, 760px);
+            overflow: auto;
+            padding: 30px;
+            border-radius: 6px;
+            background: var(--cream);
+            box-shadow: 0 20px 70px rgba(0, 0, 0, .2);
+        }
+        .dialog h2 { margin: 0 40px 8px 0; font-size: 30px; }
+        .dialog-intro { margin-bottom: 22px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--ink);
+            font-size: 20px;
+            line-height: 1;
+        }
+        .cart-items { display: grid; gap: 13px; margin: 16px 0 20px; }
+        .cart-empty { padding: 22px 0; color: var(--muted); font-size: 14px; text-align: center; }
+        .cart-item { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+        .cart-item-name { display: block; font-family: var(--serif); font-size: 16px; }
+        .cart-item-price { color: var(--muted); font-size: 12px; }
+        .quantity { display: flex; align-items: center; gap: 10px; }
+        .quantity button { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--rose-dark); }
+        .quantity span { min-width: 12px; text-align: center; font-size: 13px; }
+        .total-row { display: flex; justify-content: space-between; padding: 14px 0 18px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 700; }
+        .checkout-form { display: grid; gap: 12px; }
+        .checkout-form label { display: grid; gap: 6px; color: #6d5b53; font-size: 12px; font-weight: 600; }
+        .checkout-form input, .checkout-form textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            outline: none;
+            background: white;
+            color: var(--ink);
+            font-size: 13px;
+        }
+        .checkout-form input:focus, .checkout-form textarea:focus { border-color: var(--rose); }
+        .checkout-form textarea { min-height: 70px; resize: vertical; }
+        .checkout-button {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 3px;
+            background: var(--rose);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .checkout-button:hover { background: var(--rose-dark); }
+        .success-message { padding: 24px 0 8px; text-align: center; }
+        .success-icon { font-size: 38px; }
+        .success-message h2 { margin: 10px 0; }
+        .success-message p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+        @media (max-width: 760px) {
+            .nav { width: min(100% - 32px, 1160px); height: 68px; }
+            .nav-links { gap: 18px; }
+            .nav-links a:not(:first-child) { display: none; }
+            .hero { width: calc(100% - 32px); margin-top: 16px; grid-template-columns: 1fr; }
+            .hero-copy { padding: 46px 30px 40px; }
+            .hero-image { min-height: 300px; grid-row: 1; }
+            .trust-row { width: calc(100% - 32px); flex-wrap: wrap; gap: 13px 24px; justify-content: flex-start; }
+            .menu-section, .made-with-love { width: calc(100% - 32px); }
+            .menu-section { margin: 68px auto 72px; }
+            .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+            .product-info { padding: 14px; }
+            .product-topline { align-items: flex-start; flex-direction: column; gap: 5px; }
+            .product-info p { min-height: 58px; }
+            .made-with-love { margin-bottom: 65px; }
+        }
+        @media (max-width: 480px) {
+            .announcement { font-size: 10px; }
+            .brand { font-size: 23px; }
+            .nav-links { gap: 10px; font-size: 12px; }
+            .cart-button { gap: 6px; padding: 9px 11px; }
+            .hero-image { min-height: 240px; }
+            .hero-copy { padding: 36px 24px; }
+            h1 { font-size: 46px; }
+            .section-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+            .products { grid-template-columns: 1fr; gap: 16px; }
+            .product-image { aspect-ratio: 1.55; }
+            .product-topline { flex-direction: row; align-items: baseline; }
+            .product-info p { min-height: unset; }
+            .dialog { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="announcement">A little sweetness, made fresh daily <span>✦</span> Free delivery on orders over ₹1,500</div>
+    <header>
+        <nav class="nav" aria-label="Main navigation">
+            <a class="brand" href="#" aria-label="Anjali Co. home">anjali<span> co.</span></a>
+            <div class="nav-links">
+                <a href="#menu">Our menu</a>
+                <a href="#story">Our story</a>
+                <button class="cart-button" type="button" id="open-cart" aria-label="Open shopping basket">
+                    Basket <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow">Small batches · Big love</p>
+                <h1 id="hero-title">A little piece of <em>happiness.</em></h1>
+                <p>Thoughtful cakes and buttery pastries, made from scratch and baked fresh for your sweetest moments.</p>
+                <a class="primary-link" href="#menu">Explore the menu <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-image" role="img" aria-label="A beautifully decorated chocolate celebration cake"></div>
+        </section>
+
+        <div class="trust-row" aria-label="Our promises">
+            <span><b>✳</b> Baked fresh every day</span>
+            <span><b>♡</b> Real, simple ingredients</span>
+            <span><b>✦</b> Made for sharing</span>
+        </div>
+
+        <section class="menu-section" id="menu" aria-labelledby="menu-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">The good stuff</p>
+                    <h2 id="menu-title">Made to make your day.</h2>
+                </div>
+                <p class="section-note">A few of our most-loved treats</p>
+            </div>
+            <div class="products">
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" alt="Chocolate layer cake with smooth frosting" loading="lazy">
+                        <span class="tag">Bestseller</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-topline"><h3>Chocolate Dream Cake</h3><span class="price">₹850</span></div>
+                        <p>Rich chocolate layers, silky ganache, and a little bit of magic.</p>
+                        <button class="add-button" type="button" data-product="Chocolate Dream Cake" data-price="850">Add to basket</button>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80" alt="Fresh strawberry and cream dessert" loading="lazy">
+                        <span class="tag">Fresh favourite</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-topline"><h3>Strawberry Cloud Cake</h3><span class="price">₹950</span></div>
+                        <p>Fluffy vanilla sponge, fresh strawberries, and whipped cream.</p>
+                        <button class="add-button" type="button" data-product="Strawberry Cloud Cake" data-price="950">Add to basket</button>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80" alt="Golden flaky croissants fresh from the oven" loading="lazy">
+                        <span class="tag">Morning treat</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-topline"><h3>Butter Croissant Box</h3><span class="price">₹420</span></div>
+                        <p>Four golden, flaky croissants made with real French butter.</p>
+                        <button class="add-button" type="button" data-product="Butter Croissant Box" data-price="420">Add to basket</button>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=900&q=80" alt="Pink frosted cupcakes topped with sprinkles" loading="lazy">
+                        <span class="tag">Made for sharing</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-topline"><h3>Vanilla Party Cupcakes</h3><span class="price">₹540</span></div>
+                        <p>A box of six soft vanilla cupcakes with dreamy buttercream.</p>
+                        <button class="add-button" type="button" data-product="Vanilla Party Cupcakes" data-price="540">Add to basket</button>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=900&q=80" alt="Freshly baked chocolate chip cookies" loading="lazy">
+                        <span class="tag">A sweet classic</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-topline"><h3>Chocolate Chunk Cookies</h3><span class="price">₹360</span></div>
+                        <p>Four chewy, golden cookies loaded with chocolate chunks.</p>
+                        <button class="add-button" type="button" data-product="Chocolate Chunk Cookies" data-price="360">Add to basket</button>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=900&q=80" alt="Delicate fruit tart with fresh berries" loading="lazy">
+                        <span class="tag">Patisserie pick</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-topline"><h3>Berry Cream Tart</h3><span class="price">₹680</span></div>
+                        <p>Buttery pastry shell, vanilla cream, and seasonal berries.</p>
+                        <button class="add-button" type="button" data-product="Berry Cream Tart" data-price="680">Add to basket</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="made-with-love" id="story" aria-labelledby="story-title">
+            <p class="eyebrow">From our kitchen to yours</p>
+            <h2 id="story-title">The sweetest things take time.</h2>
+            <p>At Anjali Co., every batch is mixed, folded, and finished by hand. We believe the best celebrations begin with something made with love.</p>
+        </section>
+    </main>
+
+    <footer><strong>anjali co.</strong><br><br>Baked with love, shared with joy. &copy; 2026 Anjali Co.</footer>
+
+    <div class="overlay" id="cart-overlay" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+        <section class="dialog">
+            <button type="button" class="close-button" id="close-cart" aria-label="Close basket">&times;</button>
+            <div id="cart-content">
+                <h2 id="cart-title">Your basket</h2>
+                <p class="dialog-intro">The good things you picked, all in one place.</p>
+                <div class="cart-items" id="cart-items"></div>
+                <div class="total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+                <form class="checkout-form" id="checkout-form">
+                    <label>Your name<input name="name" autocomplete="name" required placeholder="e.g. Anjali Sharma"></label>
+                    <label>Phone number<input name="phone" type="tel" autocomplete="tel" required placeholder="For order updates"></label>
+                    <label>Delivery address<textarea name="address" autocomplete="street-address" required placeholder="Where should we bring your treats?"></textarea></label>
+                    <button class="checkout-button" type="submit">Place my order</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const basket = new Map();
+        const overlay = document.getElementById("cart-overlay");
+        const countLabel = document.getElementById("cart-count");
+        const content = document.getElementById("cart-content");
+        const initialCartMarkup = content.innerHTML;
+
+        function formatPrice(amount) {
+            return "₹" + amount.toLocaleString("en-IN");
+        }
+
+        function basketCount() {
+            let count = 0;
+            basket.forEach((item) => count += item.quantity);
+            return count;
+        }
+
+        function renderBasket() {
+            const itemList = document.getElementById("cart-items");
+            const totalLabel = document.getElementById("cart-total");
+            itemList.replaceChildren();
+            countLabel.textContent = basketCount();
+            let total = 0;
+
+            if (basket.size === 0) {
+                const empty = document.createElement("p");
+                empty.className = "cart-empty";
+                empty.textContent = "Your basket is waiting for something sweet.";
+                itemList.append(empty);
+            } else {
+                basket.forEach((item, name) => {
+                    total += item.price * item.quantity;
+                    const row = document.createElement("div");
+                    row.className = "cart-item";
+                    const details = document.createElement("div");
+                    const title = document.createElement("span");
+                    title.className = "cart-item-name";
+                    title.textContent = name;
+                    const price = document.createElement("span");
+                    price.className = "cart-item-price";
+                    price.textContent = formatPrice(item.price) + " each";
+                    details.append(title, price);
+
+                    const controls = document.createElement("div");
+                    controls.className = "quantity";
+                    const minus = document.createElement("button");
+                    minus.type = "button";
+                    minus.textContent = "−";
+                    minus.setAttribute("aria-label", "Remove one " + name);
+                    minus.addEventListener("click", () => changeQuantity(name, -1));
+                    const quantity = document.createElement("span");
+                    quantity.textContent = item.quantity;
+                    const plus = document.createElement("button");
+                    plus.type = "button";
+                    plus.textContent = "+";
+                    plus.setAttribute("aria-label", "Add one " + name);
+                    plus.addEventListener("click", () => changeQuantity(name, 1));
+                    controls.append(minus, quantity, plus);
+                    row.append(details, controls);
+                    itemList.append(row);
+                });
+            }
+
+            totalLabel.textContent = formatPrice(total);
+            document.getElementById("checkout-form").hidden = basket.size === 0;
+            totalLabel.parentElement.hidden = basket.size === 0;
+        }
+
+        function changeQuantity(name, change) {
+            const item = basket.get(name);
+            if (!item) return;
+            item.quantity += change;
+            if (item.quantity <= 0) basket.delete(name);
+            renderBasket();
+        }
+
+        document.querySelectorAll(".add-button").forEach((button) => {
+            button.addEventListener("click", () => {
+                const name = button.dataset.product;
+                const price = Number(button.dataset.price);
+                const item = basket.get(name);
+                if (item) item.quantity += 1;
+                else basket.set(name, { price, quantity: 1 });
+                renderBasket();
+                button.textContent = "Added to basket ✓";
+                window.setTimeout(() => { button.textContent = "Add to basket"; }, 1200);
+            });
+        });
+
+        document.getElementById("open-cart").addEventListener("click", () => {
+            renderBasket();
+            overlay.classList.add("open");
+            document.getElementById("close-cart").focus();
+        });
+        document.getElementById("close-cart").addEventListener("click", () => overlay.classList.remove("open"));
+        overlay.addEventListener("click", (event) => {
+            if (event.target === overlay) overlay.classList.remove("open");
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") overlay.classList.remove("open");
+        });
+
+        content.addEventListener("submit", (event) => {
+            if (event.target.id !== "checkout-form") return;
+            event.preventDefault();
+            if (basket.size === 0) return;
+            const name = new FormData(event.target).get("name");
+            const success = document.createElement("div");
+            success.className = "success-message";
+            const icon = document.createElement("div");
+            icon.className = "success-icon";
+            icon.textContent = "♡";
+            const heading = document.createElement("h2");
+            heading.textContent = "Thank you, " + name + "!";
+            const message = document.createElement("p");
+            message.textContent = "Your order has been noted. Anjali Co. will be in touch shortly to confirm the details.";
+            const close = document.createElement("button");
+            close.className = "checkout-button";
+            close.type = "button";
+            close.textContent = "Lovely, thanks!";
+            close.addEventListener("click", () => {
+                basket.clear();
+                content.innerHTML = initialCartMarkup;
+                renderBasket();
+                overlay.classList.remove("open");
+            });
+            success.append(icon, heading, message, close);
+            content.replaceChildren(success);
+        });
+
+        renderBasket();
+    </script>
+</body>
+</html>
